@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -14,6 +15,9 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+  @Autowired
+  private JwtService jwtService;
 
   @Override
   protected void doFilterInternal(
@@ -29,6 +33,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       return;
     }
     jwt = authHeader.substring(7);
-    userEmail = // todo:extract the userEmail from JWT token
+    userEmail = jwtService.extractUsername(jwt);
   }
 }
