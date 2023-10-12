@@ -1,4 +1,4 @@
-package com.jwt_authentication;
+package com.jwt_authentication.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
