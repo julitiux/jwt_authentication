@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
+
 @Service
 public class JwtService {
 
@@ -16,10 +18,14 @@ public class JwtService {
   private Claims extractAllClaims(String token) {
     return Jwts
       .parserBuilder()
-      .setSigningKey(getSignInKey())  //TODO: implement method getSignInKey()
+      .setSigningKey(getSignInKey())
       .build()
       .parseClaimsJws(token)
       .getBody();
+  }
+
+  private Key getSignInKey() {
+    return null;
   }
 
 }
