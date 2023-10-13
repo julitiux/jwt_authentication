@@ -4,9 +4,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.util.Map;
 import java.util.function.Function;
 
 @Service
@@ -21,6 +23,10 @@ public class JwtService {
   public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
     final Claims claims = extractAllClaims(token);
     return claimsResolver.apply(claims);
+  }
+
+  public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    return null;
   }
 
   private Claims extractAllClaims(String token) {
