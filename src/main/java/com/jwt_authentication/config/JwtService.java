@@ -1,6 +1,7 @@
 package com.jwt_authentication.config;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,7 +12,12 @@ public class JwtService {
   }
 
   private Claims extractAllClaims(String token) {
-    return null;
+    return Jwts
+      .parserBuilder()
+      .setSigningKey(getSignInKey())  //TODO: implement method getSignInKey()
+      .build()
+      .parseClaimsJws(token)
+      .getBody();
   }
 
 }
