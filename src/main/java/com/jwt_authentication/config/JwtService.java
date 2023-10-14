@@ -19,8 +19,8 @@ public class JwtService {
 
   private static final String SECRET_KEY = "";
 
-  public String extractUsername(String jwt) {
-    return null;
+  public String extractUsername(String token) {
+    return extractClaim(token, Claims::getSubject);
   }
 
   public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -28,8 +28,8 @@ public class JwtService {
     return claimsResolver.apply(claims);
   }
 
-  public String generateToken(UserDetails userDetails){
-    return generateToken(new HashMap<>(),userDetails);
+  public String generateToken(UserDetails userDetails) {
+    return generateToken(new HashMap<>(), userDetails);
   }
 
   public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
