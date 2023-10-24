@@ -23,15 +23,17 @@ public class SecurityConfiguration {
     http
       .csrf()
       .disable()
-      .authorizeHttpRequests()
-      .requestMatchers("")
-      .permitAll()
-      .anyRequest()
-      .authenticated()
-      .and()
-      .sessionManagement()
-      .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-      .and()
+      .authorizeRequests(authorizeRequests ->
+        authorizeRequests
+          .requestMatchers("")
+          .permitAll()
+          .anyRequest()
+          .authenticated()
+      )
+      .sessionManagement(sessionManagement ->
+        sessionManagement
+          .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+      )
       .authenticationProvider(authenticationProvider)
       .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
