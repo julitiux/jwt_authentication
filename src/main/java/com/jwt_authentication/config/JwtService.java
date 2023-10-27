@@ -17,7 +17,8 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-  private static final String SECRET_KEY = "";
+  //https://www.save-editor.com/crypto/crypt_key_generator.html
+  private static final String SECRET_KEY = "0EFAF0E7665F3BFB5451236882FAB628A27E62F3A570E0E95F879882E627DF2D";
 
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);
